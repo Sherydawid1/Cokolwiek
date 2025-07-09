@@ -61,14 +61,41 @@
     }
 
     .accordion-content {
-      display: none;
-      margin-top: 16px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
       font-size: 13px;
       color: #ffffff;
+      margin-top: 16px;
     }
 
     .accordion-content.open {
-      display: block;
+      max-height: 500px;
+    }
+
+    @media screen and (max-width: 800px) {
+      .container {
+        padding: 30px 12px;
+      }
+
+      .accordion {
+        padding: 16px;
+        margin-bottom: 20px;
+      }
+
+      .accordion h3 {
+        font-size: 17px;
+      }
+
+      .accordion p.subtitle,
+      .accordion-content,
+      .accordion button {
+        font-size: 13px;
+      }
+
+      .accordion button {
+        padding: 10px 16px;
+      }
     }
   </style>
 </head>
@@ -121,7 +148,9 @@
       });
 
       content.classList.toggle('open');
-      setTimeout(reportHeight, 300); // aktualizacja po animacji
+
+      // Poczekaj aż animacja się zakończy i dopasuj wysokość iframe
+      setTimeout(reportHeight, 500);
     }
 
     function reportHeight() {
