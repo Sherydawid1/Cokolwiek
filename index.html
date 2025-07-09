@@ -70,31 +70,6 @@
     .accordion-content.open {
       display: block;
     }
-
-    @media screen and (max-width: 800px) {
-      .container {
-        padding: 30px 12px;
-      }
-
-      .accordion {
-        padding: 16px;
-        margin-bottom: 20px;
-      }
-
-      .accordion h3 {
-        font-size: 17px;
-      }
-
-      .accordion p.subtitle,
-      .accordion-content,
-      .accordion button {
-        font-size: 13px;
-      }
-
-      .accordion button {
-        padding: 10px 16px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -146,19 +121,16 @@
       });
 
       content.classList.toggle('open');
-      setTimeout(sendHeight, 300); // aktualizuj wysokość iframe po rozwinięciu
+      setTimeout(reportHeight, 300); // aktualizacja po animacji
     }
 
-    function sendHeight() {
+    function reportHeight() {
       const height = document.body.scrollHeight;
-      window.parent.postMessage("iframeHeight:" + height, "*");
+      parent.postMessage("iframeHeight:" + height, "*");
     }
 
-    window.onload = sendHeight;
-    window.addEventListener("resize", sendHeight);
-    document.addEventListener("click", () => {
-      setTimeout(sendHeight, 300);
-    });
+    window.addEventListener("load", reportHeight);
+    window.addEventListener("resize", reportHeight);
   </script>
 </body>
 </html>
