@@ -23,15 +23,15 @@
     .container {
       max-width: 670px;
       width: 100%;
-      padding: 30px 16px;
+      padding: 16px;
       margin: 0 auto;
     }
 
     .accordion {
       background: rgba(255, 255, 255, 0.25);
       border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 24px;
+      padding: 5px 20px; /* <-- Zmieniono z 20px na 5px góra/dół */
+      margin-bottom: 16px;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
       touch-action: manipulation;
     }
@@ -75,12 +75,12 @@
 
     @media screen and (max-width: 800px) {
       .container {
-        padding: 30px 12px;
+        padding: 12px;
       }
 
       .accordion {
-        padding: 16px;
-        margin-bottom: 20px;
+        padding: 5px 16px;
+        margin-bottom: 14px;
       }
 
       .accordion h3 {
@@ -149,7 +149,6 @@
 
       content.classList.toggle('open');
 
-      // Poczekaj aż animacja się zakończy i dopasuj wysokość iframe
       setTimeout(reportHeight, 500);
     }
 
