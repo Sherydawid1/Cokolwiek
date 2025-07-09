@@ -21,7 +21,7 @@
     }
 
     .container {
-      max-width: 400px;
+      max-width: 670px;
       width: 100%;
       padding: 30px 16px;
       margin: 0 auto;
@@ -33,17 +33,20 @@
       padding: 20px;
       margin-bottom: 24px;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      touch-action: manipulation;
     }
 
     .accordion h3 {
       font-size: 19px;
       margin-bottom: 8px;
       font-weight: 600;
+      color: #ffffff;
     }
 
     .accordion p.subtitle {
       font-size: 13px;
       margin-bottom: 12px;
+      color: #ffffff;
     }
 
     .accordion button {
@@ -61,6 +64,7 @@
       display: none;
       margin-top: 16px;
       font-size: 13px;
+      color: #ffffff;
     }
 
     .accordion-content.open {
@@ -70,6 +74,25 @@
     @media screen and (max-width: 800px) {
       .container {
         padding: 30px 12px;
+      }
+
+      .accordion {
+        padding: 16px;
+        margin-bottom: 20px;
+      }
+
+      .accordion h3 {
+        font-size: 17px;
+      }
+
+      .accordion p.subtitle,
+      .accordion-content,
+      .accordion button {
+        font-size: 13px;
+      }
+
+      .accordion button {
+        padding: 10px 16px;
       }
     }
   </style>
@@ -123,15 +146,19 @@
       });
 
       content.classList.toggle('open');
-
-      // Ważne! Dla iframe-resizera
-      if (window.parentIFrame) {
-        window.parentIFrame.size(); // aktualizuje wysokość iframe
-      }
+      setTimeout(sendHeight, 300); // aktualizuj wysokość iframe po rozwinięciu
     }
-  </script>
 
-  <!-- Wymagany do auto-resize w iframie -->
-  <script src="https://cdn.jsdelivr.net/npm/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+    function sendHeight() {
+      const height = document.body.scrollHeight;
+      window.parent.postMessage("iframeHeight:" + height, "*");
+    }
+
+    window.onload = sendHeight;
+    window.addEventListener("resize", sendHeight);
+    document.addEventListener("click", () => {
+      setTimeout(sendHeight, 300);
+    });
+  </script>
 </body>
 </html>
