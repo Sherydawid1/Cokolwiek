@@ -17,12 +17,11 @@
       font-family: 'Poppins', sans-serif;
       background: transparent;
       color: #ffffff;
-      overflow: visible;
-      height: auto;
+      overflow-x: hidden;
     }
 
     .container {
-      max-width: 670px;
+      max-width: 400px;
       width: 100%;
       padding: 30px 16px;
       margin: 0 auto;
@@ -40,13 +39,11 @@
       font-size: 19px;
       margin-bottom: 8px;
       font-weight: 600;
-      color: #ffffff;
     }
 
     .accordion p.subtitle {
       font-size: 13px;
       margin-bottom: 12px;
-      color: #ffffff;
     }
 
     .accordion button {
@@ -64,7 +61,6 @@
       display: none;
       margin-top: 16px;
       font-size: 13px;
-      color: #ffffff;
     }
 
     .accordion-content.open {
@@ -74,25 +70,6 @@
     @media screen and (max-width: 800px) {
       .container {
         padding: 30px 12px;
-      }
-
-      .accordion {
-        padding: 16px;
-        margin-bottom: 20px;
-      }
-
-      .accordion h3 {
-        font-size: 17px;
-      }
-
-      .accordion p.subtitle,
-      .accordion-content,
-      .accordion button {
-        font-size: 13px;
-      }
-
-      .accordion button {
-        padding: 10px 16px;
       }
     }
   </style>
@@ -136,7 +113,6 @@
     </div>
   </div>
 
-  <!-- Toggle logic -->
   <script>
     function toggleAccordion(button) {
       const allContents = document.querySelectorAll('.accordion-content');
@@ -148,14 +124,14 @@
 
       content.classList.toggle('open');
 
-      // Notify parent iframe to resize
+      // Ważne! Dla iframe-resizera
       if (window.parentIFrame) {
-        setTimeout(() => window.parentIFrame.size(), 150);
+        window.parentIFrame.size(); // aktualizuje wysokość iframe
       }
     }
   </script>
 
-  <!-- Required for iframeResizer -->
+  <!-- Wymagany do auto-resize w iframie -->
   <script src="https://cdn.jsdelivr.net/npm/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
 </body>
 </html>
